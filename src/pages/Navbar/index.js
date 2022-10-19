@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import "../../bootstrap.min.css";
-import { LogOut } from "../../FeaturesN/Users";
+import { LogOut } from "../../Features/Users";
 
 const NavBar = () => {
   const navigate = useNavigate();
-  const user = useSelector((state) => state.auth.user);
+  const user = useSelector((state) => state.user.currUser);
   const dispatch = useDispatch();
 
   const handleLogout = () => {
@@ -64,11 +64,46 @@ const NavBar = () => {
               </>
             ) : null}
           </ul>
-          <Link to="/login">
-            <button className="btn btn-secondary my-2 my-sm-0" type="submit">
-              Login
-            </button>
-          </Link>
+          {user === null ? (
+            <Link to="/login">
+              <button className="btn btn-secondary my-2 my-sm-0" type="submit">
+                Login
+              </button>
+            </Link>
+          ) : (
+            <div className="flex">
+              {user?.email === "adminKelf06@hactiv.com" ? (
+                <Link to="/logout">
+                  <button
+                    className="btn btn-secondary my-2 my-sm-0"
+                    type="submit"
+                    onClick={handleLogout}
+                  >
+                    Log out
+                  </button>
+                </Link>
+              ) : (
+                <>
+                  <Link to="/cart">
+                    <button
+                      className="btn btn-secondary my-2 my-sm-0"
+                      type="submit"
+                    >
+                      Cart
+                    </button>
+                  </Link>
+                  <Link to="/logout">
+                    <button
+                      className="btn btn-secondary my-2 my-sm-0"
+                      type="submit"
+                    >
+                      Log Out
+                    </button>
+                  </Link>
+                </>
+              )}
+            </div>
+          )}
         </div>
       </div>
     </nav>

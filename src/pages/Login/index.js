@@ -1,33 +1,33 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { FailureLogin, StartingLogin, SuccessLogin } from "../../FeaturesN/Users";
+import { FailureLogin, StartingLogin, SuccessLogin } from "../../Features/Users";
 import "./style.css";
 
 import axios from "axios";
 
 const Login = () => {
   const dispatch = useDispatch();
-  const { isAuth, error } = useSelector((state) => state.auth);
+  const { isAuth, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
-  const [username, setUsername] = useState(null);
+  const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
 
   const admin = {
-    username: "adminKelf06@hactiv.com",
+    email: "adminKelf06@hactiv.com",
     password: "admin06",
   };
 
   const handleSubmitLogin = (e) => {
     e.preventDefault();
     dispatch(StartingLogin());
-    if (username === admin.username && password === admin.password) {
+    if (email === admin.email && password === admin.password) {
       dispatch(SuccessLogin(admin));
       navigate("/admin");
-    } else {
+    } else  {
       axios
         .post(`${process.env.REACT_APP_BASE_API}auth/login`, {
-          username: username,
+          email: email,
           password: password,
         })
         .then((res) => {
@@ -35,10 +35,12 @@ const Login = () => {
           navigate("/home");
         })
         .catch((err) => {
-          dispatch(FailureLogin());
+          dispatch(FailureLogin(
+            err.response.data.message
+          ));
         }
       );
-    }
+    } 
   };
 
   return (
@@ -51,7 +53,7 @@ const Login = () => {
           <input 
             type="email" 
             id="form2Example1" className="form-control" 
-            onChange={(e) => setUsername(e.target.value)}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
 
@@ -78,33 +80,11 @@ const Login = () => {
             onClick={handleSubmitLogin}
             disabled={isAuth}
           >
-            {isAuth ? "Loading..." : "Login"}
+            {
+              isAuth ? "Loading..." : "Login"
+            }
           </button>
         </div>
-        {error && (
-          <p className="text-center text-red-500">Wrong username or password</p>
-        )}
-        {/* <div className="text-center">
-          <p>
-            Not a member? <a href="#!">Register</a>
-          </p>
-          <p>or sign up with:</p>
-          <button type="button" className="btn btn-link btn-floating mx-1">
-            <i className="fab fa-facebook-f"></i>
-          </button>
-
-          <button type="button" className="btn btn-link btn-floating mx-1">
-            <i className="fab fa-google"></i>
-          </button>
-
-          <button type="button" className="btn btn-link btn-floating mx-1">
-            <i className="fab fa-twitter"></i>
-          </button>
-
-          <button type="button" className="btn btn-link btn-floating mx-1">
-            <i className="fab fa-github"></i>
-          </button>
-        </div> */}
       </form>
     </div>
   );
