@@ -3,11 +3,12 @@ import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { itemFail, itemStart, itemSuccess } from "../../Features/Items";
+import CardProduct from "../SalesReport";
 
 const Home = (props) => {
   // const navigate = useNavigate();
   const item = useDispatch();
-  const { items, loading } = useSelector((state) => state.items);
+  const { items, loading } = useSelector((state) => state.item);
 
   const Api = "https://fakestoreapi.com/products";
 
@@ -22,40 +23,45 @@ const Home = (props) => {
           item.sold = 0;
           return item;
         });
-        items(itemSuccess(createData));
+        item(itemSuccess(createData));
       })
       .catch((err) => {
         item(itemFail([]));
       });
   };
+  
 
   useEffect(() => {
-    if(items.length === 0) {
+    if (items.length === 0) {
       getData();
     }
   }, []);
 
-  useEffect(() => {
-    
-  }, [items]);
-  
+  useEffect(() => {}, [items]);
 
   return (
-      <div className="card text-white bg-primary mb-3" style={{maxWidth: '20rem'}}>
-        {
-          loading ? (
-            Array.from(Array(10)).map((item, index) => (
-              <div className="card-header" key={index}>Loading...</div>
-            ))
-          ) : (
-            items.map((item, index) => (
-              <div className="card-header" key={index}>{item.title}</div>
-            ))
-          )
-          
-          
-        }
-      </div>
+    <div
+      className=""
+      style={{ maxWidth: "20rem" }}
+    >
+      {loading ? (
+        Array.from(Array(10)).map((item, index) => (
+          <div className="card-header" key={index}>
+            Loading...
+          </div>
+        ))
+      ) : (
+        <div className="container" style={{ display : 'grid'}}>
+          <div className="row">
+            {items.map((item, index) => (
+              <div className="col-sm-4 py-4" key={index}>
+                <CardProduct item={item} index={index} />
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </div>
   );
 };
 

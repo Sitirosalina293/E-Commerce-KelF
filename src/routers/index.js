@@ -1,6 +1,7 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Admin from '../pages/Admin'
+import DetailItem from '../pages/Detail'
 import Home from '../pages/Home'
 import Login from '../pages/Login'
 import LogOut from '../pages/Logout'
@@ -16,6 +17,8 @@ const Router = () => {
             <Route path='/logout' element={<LogOut />} />
             <Route path='/admin' element={<Admin />} />
             <Route path='/sales-report' element={<SalesReport />} />  
+            <Route path='/detail-item' element={<DetailItem />} />  
+
         </Routes>
     </div>
   )

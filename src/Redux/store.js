@@ -7,7 +7,7 @@ import cartReducer from "../Features/Carts/index";
 const rootReducer = combineReducers({
     user: userReducer,
     cart: cartReducer,
-    items: itemsReducer,
+    item: itemsReducer,
 });
 
 export const store = configureStore({
