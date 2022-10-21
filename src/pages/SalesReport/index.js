@@ -24,7 +24,7 @@ const CardProduct = (props) => {
         </p>
         <p className="card-text">{item.price}.</p>
         <a onClick={() => handleItem(item)} className="btn btn-success">detail</a>
-        {/* <a href={`/sales-report/${item.id}`} className="btn btn-success">Add to cart</a> */}
+        <a href={''} className="btn btn-success">Add to cart</a>
       </div>
     </div>
   );

@@ -54,7 +54,7 @@ const NavBar = () => {
                   </Link>
                 </li>
                 <li className="nav-item">
-                  <Link className="" to="/admin">
+                  <Link className="" to="/sales-report">
                     <a className="nav-link active" href="#">
                       Sales Report
                       {/* <span className="visually-hidden">(current)</span> */}
