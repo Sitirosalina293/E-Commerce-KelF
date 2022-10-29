@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { updateStock } from "../../Features/Items";
@@ -5,18 +6,20 @@ import { updateStock } from "../../Features/Items";
 const Admin = () => {
   const { items, loading } = useSelector((state) => state.item);
   const dispatch = useDispatch();
-  const [stockItem, setStockItem] = React.useState(0);
+  const [stockItem, setStockItem] = useState(20);
 
   const handleUpdateStock = (data) => {
     if (stockItem) {
-      dispatch(updateStock({ ...data, stock: parseInt(stockItem) }));
-      console.log("data if : ", data);
+      dispatch(updateStock({ ...data, stocks: parseInt(stockItem) }));
       alert("Stock berhasil di update");
+
     } else {
-      dispatch(updateStock({ ...data, stock: 0 }));
+      dispatch(updateStock({ ...data, stocks: 0 }));
       console.log("data else : ", data);
     }
   };
+
+  // save to localhost
 
   return (
     <>
@@ -70,14 +73,18 @@ const Admin = () => {
                       <td>
                         <input
                           type="number"
+                          label="Stock"
+                          variant="outlined"
+                          size="small"
                           className="form-control"
-                          value={item?.stockItem}
                           min="0"
+                          defaultValue={item?.stocks || 20}
                           onChange={(e) => setStockItem(e.target.value)}
                         />
                       </td>
                       <td>
                         <button
+                        variant="contained"
                           className="btn btn-primary"
                           onClick={() => handleUpdateStock(item)}
                         >

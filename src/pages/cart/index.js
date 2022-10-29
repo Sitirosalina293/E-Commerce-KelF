@@ -1,46 +1,34 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, Text } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
-import { addItem, updateItems } from "../../Features/Carts";
 import { BsFillPlusSquareFill } from "react-icons/bs";
 import { FaMinusSquare } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
+import { removeItem } from "../../Features/Carts";
 
-const DetailItem = () => {
-  const location = useLocation();
-  const [item, setItem] = useState({});
-  const user = useSelector((state) => state.user.currUser);
-  const cart = useSelector((state) => state.cart);
-  const navigation = useNavigate();
-  const dispatch = useDispatch();
+const CartItems = (data) => {
+const dispatch = useDispatch();
+const handleDel = () => {
+    dispatch(removeItem({ ...data }));
+};
+const location = useLocation();
+const [item, setItem] = useState({});
+const user = useSelector((state) => state.user.currUser);
 
-  const [qty, setQty] = useState(0);
+const [qty, setQty] = useState(0);
 
-  useEffect(() => {
+useEffect(() => {
     setItem(location.state);
-  }, [location]);
+}, [location]);
 
-  const handleQty = (e) => {
+const handleQty = (e) => {
     if (e === "inc") {
-      setQty(qty + 1);
-    } else {
-      qty > 0 && setQty(qty - 1);
-    }
-  };
+        setQty(qty + 1);
+} else {
+    qty > 0 && setQty(qty - 1);
+}
+};
 
-  const handleAddToCart = (item) => {
-    let a = cart?.items.filter((data) => data?.id === item?.id);
-    if (a.length === 0) {
-      dispatch(addItem({ ...item, qty }));
-    } else {
-      dispatch(updateItems({ ...item, qty: a[0].qty + qty }));
-    }
-  };
-
-  const handleNeedLogin = () => {
-    navigation("/login");
-  };
-
-  return (
+return (
     <div className="container mt-1 mb-2">
       <div className="row d-flex justify-content-center">
         <div className="col-md-10">
@@ -51,23 +39,9 @@ const DetailItem = () => {
                   <div className="text-center p-4">
                     <img
                       id="main-image"
-                      src={item?.image}
-                      alt={item?.title}
+                      src={data?.image}
+                      alt={data?.title}
                       width="250"
-                    />
-                  </div>
-                  <div className="thumbnail text-center">
-                    <img
-                      onClick="change_image(this)"
-                      src={item?.image}
-                      alt={item?.title}
-                      width="70"
-                    />
-                    <img
-                      onClick="change_image(this)"
-                      src={item?.image}
-                      alt={item?.title}
-                      width="70"
                     />
                   </div>
                 </div>
@@ -76,14 +50,14 @@ const DetailItem = () => {
                 <div className="product p-4">
                   <div className="mt-4 mb-3">
                     <span className="text-uppercase text-muted brand">
-                      {item?.category}
+                      {data?.category}
                     </span>
-                    <h5 className="text-uppercase">{item?.title}</h5>
+                    <h5 className="text-uppercase">{data?.title}</h5>
                     <div className="price d-flex flex-row align-items-center">
-                      <span className="act-price">${item?.price}</span>
+                      <span className="act-price">${data?.price}</span>
                     </div>
                   </div>
-                  <p className="about">{item?.description}</p>
+                  <p className="about">{data?.description}</p>
                   {user?.email ? (
                     ""
                   ) : (
@@ -97,11 +71,10 @@ const DetailItem = () => {
                             <button
                               className="dec qty-btn"
                               onClick={() => handleQty("dec")}
-                              
                             >
                               <FaMinusSquare />
                             </button>
-                            
+
                             <div
                               className="valueQty"
                               style={{ width: "50px", textAlign: "center" }}
@@ -126,20 +99,6 @@ const DetailItem = () => {
                           )}
                         </div>
                       </div>
-                      <div className="cart mt-4 align-items-center">
-                        <button
-                          className="btn btn-danger text-uppercase mr-2 px-4"
-                          variant="contained"
-                          onClick={() => {
-                            user ? handleAddToCart(item) : handleNeedLogin();
-                          }}
-                          disabled={qty < 1}
-                        >
-                          Add to cart
-                        </button>
-                        <i className="fa fa-heart text-muted"></i>
-                        <i className="fa fa-share-alt text-muted"></i>
-                      </div>
                     </>
                   )}
                 </div>
@@ -152,4 +111,59 @@ const DetailItem = () => {
   );
 };
 
-export default DetailItem;
+const CartPage = () => {
+    const cart = useSelector((state) => state.cart);
+    const dispatch = useDispatch()
+    // const handleCheckout = (cart) => {
+    //   const inibaru = cart.products.map(item => item.id)
+    //   if (cart.products.length !== 0) {
+    //     cart.products.map((data) => {
+    //       return dispatch(checkOut({
+    //         ...data
+    //       }));
+    //     })
+    //   }
+    //   dispatch(productCheckout(cart));
+    //   dispatch(removeCart());
+    // }
+  
+    return (
+      <div id="cart">
+        <Text>
+          Shopping Cart
+        </Text>
+        <div className="container-item flex flex-wrap gap-8 justify-between">
+          <div className="item-cart-container" style={{ flex: '3' }}>
+            {cart.items.length !== 0 ? (
+              cart?.items.map((item, i) => <CartItems data={item} key={i} />)
+            ) : (
+              <Text>No items</Text>
+            )}
+          </div>
+          <div className="summary flex-1">
+            <div className="wrap-inner border border-gray-300 rounded-xl p-6">
+            <Text>No items</Text>
+              <div className="total-product flex justify-between mt-7">
+              <Text>No items</Text>
+                <Text>{cart.totalQuantity}</Text>
+              </div>
+              <div className="total-product flex justify-between mt-3">
+              <Text>No items</Text>
+                <Text variant="string">
+                  ${cart.totalPrice.toFixed(2)}
+                </Text>
+              </div>
+            </div>
+            {/* <button
+              className="mt-4 bg-black w-full py-2 text-white rounded-lg hover:opacity-80"
+              onClick={() => handleCheckout(cart)}
+            >
+              Checkout
+            </button> */}
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+export default CartPage;

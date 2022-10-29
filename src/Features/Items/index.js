@@ -21,20 +21,20 @@ const itemsSlice = createSlice({
         },
         itemAdd: (state, { payload }) => {
             state.items.map((item) => {
-                const FData = payload.items.find((data) => data.id === item.id);
-                if (FData) {
-                    item.stock -= FData.quantity;
-                    item.sold += FData.quantity;
+                const stockItem = payload.items.find((data) => data.id === item.id);
+                if (stockItem) {
+                    item.stock -= stockItem.quantity;
+                    item.sold += stockItem.quantity;
                 }
-                return FData;
+                return stockItem;
             });
             state.totalIncome += payload.totalPrice;
         },
         updateStock: (state, action) => {
-            const FData = state.items.map((item) => 
+            const stockItem = state.items.map((item) => 
                 item.id === action.payload.id ? action.payload : item
             );
-            state.items = FData;
+            state.items = stockItem;
         },
     }
 })
