@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { Spinner } from 'react-bootstrap';
+import { Star } from 'react-bootstrap-icons';
 
 const CardProducts = ({item, index}) => {
   const navigate = useNavigate();
@@ -9,43 +9,20 @@ const CardProducts = ({item, index}) => {
   }
 
   return (
-      <div>
-      <div
-        key={index}
-        className="d-flex"
-        onClick={() => handleClickProduct(item)}
-      >
-        {item ? (
-          <div>
-            <img
-              className="max-w-full max-h-full"
-              alt={item?.title}
-              src={item?.image}
-            />
-          </div>
-        ) : (<Spinner/>)}
-
-        {item ? (
-          <div className="w-full mt-4">
-            <p>
-              {item?.title?.slice(0, 50)}...
-            </p>
-            <div className="flex items-center my-2">
-              $ 
-              <p>{item?.price}</p>
-            </div>
-            <div className="flex items-center">
-              star
-              <p>
-                {item?.rating?.rate}
-              </p>
-            </div>
-          </div>
-        ) : (
-          <div className="w-full mt-4">
-            <Spinner/>
-          </div>
-        )}
+    <div className="card box-shadow h-100" key={index} onClick={() => handleClickProduct(item)}>
+      <img
+        src={item?.image}
+        className="card-img-top p-2"
+        style={{ height: "20rem" }}
+        alt={item?.title}
+      />
+      <div className="card-body">
+        <h5 className="card-title">{item?.title.slice(0, 50)}</h5>
+        <p className="card-text">{item.description.slice(0, 100)}...</p>
+      </div>
+      <div className='mb-2 ms-3'>
+        <h4 className="card-text">$ {item.price}</h4>
+        <p className="card-text"><Star/>{item.price}.</p>
       </div>
     </div>
   );

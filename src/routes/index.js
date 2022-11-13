@@ -1,27 +1,28 @@
-import React from 'react'
-import { Route, Routes } from 'react-router-dom'
-import NavBar from '../components/NavBar';
-import Admin from '../pages/admin/Admin';
-import CartPage from '../pages/cart/CartPage';
-import DetailProduct from '../pages/detail-product/DetailProduct';
-import HomePage from '../pages/home/HomePage';
-import LoginPage from '../pages/login/LoginPage';
-import SalesReportPage from '../pages/sales-report/SalesReport';
-
-const Router = () => {
+import React from "react";
+import { Route, Routes } from "react-router-dom";
+import NavBar from "../components/NavBar";
+import routes from "./routes";
+function Router() {
   return (
-    <>
-      <NavBar/>
-      <Routes>
-        <Route path='/' element={<HomePage />} />
-        <Route path='/login' element={<LoginPage />} />
-        <Route path='/admin' element={<Admin />} />
-        <Route path='/detail-item' element={<DetailProduct />} />
-        <Route path='/cart' element={<CartPage />} /> 
-        <Route path='/sales-report' element={<SalesReportPage />} />  
-      </Routes>
-    </>
-  )
+    <div className="main-container">
+      <NavBar />
+      <div className="main-content mt-5">
+        <Routes>
+          {
+            routes.map((route, index) => {
+              return (
+                <Route
+                  key={index}
+                  path={route.path}
+                  element={route.element}
+                />
+              )
+            })
+          }
+        </Routes>
+      </div>
+    </div>
+  );
 }
 
-export default Router
+export default Router;

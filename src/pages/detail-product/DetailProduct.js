@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { addProduct, updateProduct } from '../../features/cartRedux';
 
 const DetailProduct = () => {
+
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const user = useSelector((state) => state.user.currentUser);
   const cart = useSelector((state) => state.cart);
-  console.log(cart)
   
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(0);

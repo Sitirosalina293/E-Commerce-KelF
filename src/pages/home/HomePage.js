@@ -2,22 +2,22 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import CardProducts from '../../components/CardItem/CardProd';
 import { useDispatch, useSelector } from 'react-redux';
+import Spinners from '../../components/Loader';
 import {
   productFail,
   productStart,
   productSuccess,
 } from '../../features/productRedux';
 import conAPI from '../../components/API/getAPI';
-import { Spinner } from 'react-bootstrap';
 
 const API=`${conAPI()}products`;
 
 const HomePage = () => {
-  const dispatch = useDispatch();
+  const product = useDispatch();
   const { products, loading } = useSelector((state) => state.item);
 
   const getData = () => {
-    dispatch(productStart());
+    product(productStart());
     axios
       .get(API)
       .then((res) => {
@@ -26,10 +26,10 @@ const HomePage = () => {
           e.sold = 0;
           return e
         })
-        dispatch(productSuccess(addSomeData));
+        product(productSuccess(addSomeData));
       })
       .catch((err) => {
-        dispatch(productFail([]));
+        product(productFail([]));
       });
   };
 
@@ -41,16 +41,23 @@ const HomePage = () => {
 
   return (
     <div className='container'>
-      {loading ? (<Spinner/>
-      ) : products?.length !== 0 ? (
-        products?.map((item) => (
-          <CardProducts
-            loading={loading}
-            item={item}
-            index={item?.id}
-            key={item?.id}
-          />
-        ))
+      {loading ? (
+        <Spinners/>
+      ) : products.length !== 0 ? (
+        <div className="container" style={{ display : 'grid'}}>
+          <div className="row">
+            {products.map((item) => (
+              <div className="col-sm-3 py-4" key={item?.id}>
+                <CardProducts
+                  loading={loading}
+                  item={item}
+                  index={item?.id}
+                  key={item?.id}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
       ) : (
         <div className="w-full mt-6">
           <p>

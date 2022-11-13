@@ -42,36 +42,30 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="flex justify-center items-center  md:mt-80">
-      <div className="flex flex-col items-center justify-center p-4 rounded-md w-full md:w-1/2 shadow-md bg-blue-100">
+    <div className="container">
+      <div className="flex flex-col items-center justify-center p-4">
         <div className="text-center flex items-center justify-center flex-col">
           <h4 className="w-full">
             User Login
           </h4>
-          <p className="w-full">
-            Please login to continue
-          </p>
         </div>
-        <input
-          onChange={(e) => setUsername(e.target.value)}
-          id="username"
-          label="username"
-        />
-        <input
-          onChange={(e) => setPassword(e.target.value)}
-          id="password"
-          label="Password"
-          type="password"
-        />
-        <div className="my-6 w-full">
-          <button
-            variant="contained"
-            fullWidth
-            onClick={handleLogin}
-            disabled={loading}
-          >
-            {loading ? 'Loading...' : 'LOGIN'}
-          </button>
+        <div className='my-3 mx-auto' style={{width:'50%'}}>
+          <div class="form-floating mb-3">
+            <input type="text" class="form-control" id="username" onChange={(e) => setUsername(e.target.value)}/>
+            <label for="floatingInput">Username</label>
+          </div>
+          <div class="form-floating">
+            <input type="password" class="form-control" id="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)}/>
+            <label for="floatingPassword">Password</label>
+          </div>
+          <div class="d-grid gap-2 col-2 mx-auto mt-5">
+            <button class="btn btn-primary" 
+              type="button" 
+              onClick={handleLogin}
+              disabled={loading}>
+                {loading ? 'Loading...' : 'LOGIN'}
+            </button>
+          </div>
         </div>
         {error && (
           <p className="text-center text-red-500">Wrong username or password</p>
