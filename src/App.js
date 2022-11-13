@@ -1,15 +1,10 @@
-import "./bootstrap.min.css";
-import NavBar from "./pages/Navbar";
-import Router from "./routers";
-// import AuthLoginForm from './features/auth/AuthLoginForm';
+import Router from './routes'
 
 function App() {
   return (
-    <div className="App">
-      {/* <AuthLoginForm /> */}
-      <NavBar />
-      <Router />
-    </div>
+    <>
+      <Router/>
+    </>
   );
 }
 
