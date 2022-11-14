@@ -20,38 +20,36 @@ const CartPage = () => {
   }
 
   return (
-    <div id="cart">
-      <h4>
-        Shopping Cart
-      </h4>
-      <div className="container-item flex flex-wrap gap-8 justify-between">
-        <div className="item-cart-container" style={{ flex: '3' }}>
-          {cart.products.length !== 0 ? (
-            cart.products.map((item, i) => <CartItem data={item} key={i} />)
-          ) : (
-            <h4>No items</h4>
-          )}
+    <div>
+      <div className='container'>
+        <div>
+          <h4 className='fw-bold mb-4' style={{ width:'100%', textAlign:'center' }}>
+            Shopping Cart
+          </h4>
         </div>
-        <div className="summary flex-1">
-          <div className="wrap-inner border border-gray-300 rounded-xl p-6">
-            <h5>Your order summary</h5>
-            <div className="total-product flex justify-between mt-7">
-              <p>Total Product</p>
-              <p>{cart.totalQuantity}</p>
-            </div>
-            <div className="total-product flex justify-between mt-3">
-              <p>Total Price</p>
-              <p>
-                ${cart.totalPrice}
-              </p>
-            </div>
+        <div className="container-item flex flex-wrap gap-8 justify-between">
+          <div className="my-4" style={{ flex: '3' }}>
+            {cart.products.length !== 0 ? (
+              cart.products.map((item, i) => <CartItem data={item} key={i} />)
+            ) : (
+              <h4>No items</h4>
+            )}
           </div>
-          <button
-            className="mt-4 bg-black w-full py-2 text-white rounded-lg hover:opacity-80"
-            onClick={() => handleCheckout(cart)}
-          >
-            Checkout
-          </button>
+        </div>
+      </div>
+      <div className="shadow-lg" style={{ position:'fixed', bottom:'0px', left:'0px', width:'100%' }}>
+        <div className="px-5 py-3 mx-auto" style={{ width:'40%' }}>
+          <div className="row">
+            <p className='col'>Total Product</p>
+            <p className='col' style={{ textAlign:'right' }}>{cart.totalQuantity}</p>
+          </div>
+          <div className="row">
+            <p className='col'>Total Price</p>
+            <p className='col' style={{ textAlign:'right' }}>${cart.totalPrice}</p>
+          </div>
+          <div class="d-grid gap-2 col-1 mx-auto">
+            <button class="btn bg-success text-white" onClick={() => handleCheckout(cart)} type="button">Checkout</button>
+          </div>
         </div>
       </div>
     </div>

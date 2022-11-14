@@ -9,6 +9,7 @@ import {
   productSuccess,
 } from '../../features/productRedux';
 import conAPI from '../../components/API/getAPI';
+import Banner from '../../components/Carousel'
 
 const API=`${conAPI()}products`;
 
@@ -41,6 +42,7 @@ const HomePage = () => {
 
   return (
     <div className='container'>
+      <Banner/>
       {loading ? (
         <Spinners/>
       ) : products.length !== 0 ? (

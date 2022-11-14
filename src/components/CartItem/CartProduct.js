@@ -23,15 +23,12 @@ const CartItem = ({ data }) => {
   };
 
   return (
-    <div id="cart-item" className="h-36 flex justify-between mb-6 w-full">
-      <div className="content-cart h-full flex gap-8">
-        <div
-          className="img-wrapper h-full grid place-items-center"
-          style={{ width: '130px' }}
-        >
-          <img src={data.image} alt={data.title} className="h-8/12 w-8/12" />
+    <div className="">
+      <div className="row justify-content-lg-between">
+        <div className="col-sm-2 me-2 p-3">
+          <img src={data.image} alt={data.title} style={{height:'12rem'}}/>
         </div>
-        <div className="desc-item-cart flex flex-col justify-between pb-4">
+        <div className="col-sm-6">
           <div className="top">
             <h5>{data?.title?.slice(0, 40)}..</h5>
             <p>
@@ -42,13 +39,13 @@ const CartItem = ({ data }) => {
             delete
           </button>
         </div>
-      </div>
-      <div className="add-item">
-        <AddMinBtn
-          value={data.quantity}
-          minBtn={() => handleQuantity('dec')}
-          addBtn={() => handleQuantity('inc')}
-        />
+        <div className="col-sm-2">
+          <AddMinBtn
+            value={data.quantity}
+            minBtn={() => handleQuantity('dec')}
+            addBtn={() => handleQuantity('inc')}
+          />
+        </div>
       </div>
     </div>
   );

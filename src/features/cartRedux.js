@@ -19,7 +19,6 @@ const cartSlice = createSlice({
       localStorage.setItem('saved', JSON.stringify(state.products))
       state.totalPrice += action.payload.price * action.payload.quantity;
       localStorage.setItem('tprice', JSON.stringify(state.totalPrice))
-      alert('Product add to cart')
     },
     removeProduct: (state, action) => {
       const newProducts = state.products.filter(
@@ -58,7 +57,7 @@ const cartSlice = createSlice({
       localStorage.setItem('tprice', JSON.stringify(null))
       state.totalQuantity = 0;
       localStorage.setItem('tquantity', JSON.stringify(null))
-      alert('Your cart is empty')
+      alert('Check Out Success')
     },
     checkOut: (state, action) => {
       state.soldOutProducts.push({

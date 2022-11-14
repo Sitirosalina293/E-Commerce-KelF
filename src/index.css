@@ -1,0 +1,14 @@
+.fontTitle {
+    font-family: 'OpenSauceOneRegular';
+    font-weight: 400;
+    font-style: normal;
+    font-size: 12px;
+    color : #212121;
+ }
+.fontPrice {
+    font-family: 'OpenSauceOneRegular';
+    font-weight: 700;
+    font-style: normal;
+    font-size: 14px;
+    color : #212121;
+ }

@@ -17,41 +17,35 @@ const Admin = () => {
   }
 
   return (
-    <>
+    <div className='container'>
       {loading ? <Spinner/>
         : products.length !== 0 ?
           products.map((row) => (
-            <div className="card p-4 m-4" key={row?.id}>
-              <div className="flex flex-col md:flex-row">
-                <div className="img-wrapper grid place-items-center" style={{ width: '130px', height: '130px' }}>
-                  <img src={row?.image} alt={row?.title} className="w-8/12 h-28 object-contain" />
+            <div className="card p-2 m-2" style={{ minWidth:'200px' }} key={row?.id}>
+              <div className="row justify-content-lg-between mx-auto">
+                <div className="col-sm-2 p-3 my-auto">
+                  <img style={{ maxHeight: '14rem', maxWidth:'100%'}} src={row?.image} alt={row?.title} className="w-8/12 h-28 object-contain" />
                 </div>
-                <div className="w-full">
-                  <h1>
-                    {row?.title}
-                  </h1>
-                  <p>
-                    {row?.description.slice(0, 200)}...
-                  </p>
+                <div className="col-sm-8 p-3 my-auto">
+                  <h5>{row?.title}</h5>
+                  <p>{row?.description}</p>
                 </div>
-                <div className="m-4 flex flex-row items-center justify-center">
+                <div className="d-flex col-sm-2 my-auto mx-auto" style={{ height:'20%' }}>
                   <input
-                    id="outlined-basic"
+                    className='me-3'
                     label="Stock"
-                    variant="outlined"
                     type="number"
-                    size="small"
                     defaultValue={row?.stock}
                     onChange={(e) => setNewStock(e.target.value)}
+                    style={{ width:'45px' }}
                   />
-                  <div className="justify-end ml-4">
-                    <button
-                      variant="contained"
-                      onClick={() => handleUpdateStock(row)}
-                    >
-                      Update
-                    </button>
-                  </div>
+                  <button
+                    className='rounded px-3'
+                    variant="contained"
+                    onClick={() => handleUpdateStock(row)}
+                  >
+                    Update
+                  </button>
                 </div>
               </div>
             </div>
@@ -61,7 +55,7 @@ const Admin = () => {
             <p>Data Not Found</p>
           </div>
       }
-    </>
+    </div>
   );
 };
 

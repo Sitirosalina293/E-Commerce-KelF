@@ -5,30 +5,26 @@ export default function SalesReportPage() {
   const { products } = useSelector((state) => state.item);
   console.log(products)
   return (
-    <div className='container'>
-      {products.length !== 0 ? (
-      <table>
-        <thead>
-          <tr>
-              <th>Product</th>
-              <th>Harga</th>
-              <th>Terjual</th>
-              <th>Pendapatan</th>
-          </tr>
-        </thead>
-        <tbody>
-            {products.map((item) => (
-              <tr key={item?.id}>
-                <td component="th" scope="row">
-                  {item?.title}
-                </td>
-                <td align="right">$ {item?.price}</td>
-                <td align="right">{item?.sold}</td>
-                <td align="right">{item?.sold * item?.price}</td>
-              </tr>
-            ))}
-        </tbody>
-      </table>) :(<h4>No data</h4>)}
-    </div>
+    <>
+      {products.length === 0 ? ('') : (
+      <div className='container border rounded p-5'>
+        <div className='row fw-bold p-2 justify-content-lg-between'>
+          <div className='col-sm-8'>Product</div>
+          <div className='col'>Harga</div>
+          <div className='col'>Terjual</div>
+          <div className='col'>Pendapatan</div>
+        </div>
+        <hr/>
+        {products.map((item) => (
+          <div className='row p-2 justify-content-lg-between' key={item?.id}>
+            <div className='col-sm-8'>{item?.title}</div>
+            <div className='col' style={{ textAlign:'right' }}>$ {item?.price}</div>
+            <div className='col'style={{ textAlign:'right' }}>{item?.sold}</div>
+            <div className='col'style={{ textAlign:'right' }}>{item?.sold * item?.price}</div>
+          </div>
+        ))}
+      </div>
+      )}
+    </>
   );
 }
