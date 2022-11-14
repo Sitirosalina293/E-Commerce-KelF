@@ -7,7 +7,8 @@ export default function SalesReportPage() {
   return (
     <>
       {products.length === 0 ? ('') : (
-      <div className='container border rounded p-5'>
+      <div className='container border rounded p-5 min-vh-100
+      '>
         <div className='row fw-bold p-2 justify-content-lg-between'>
           <div className='col-sm-8'>Product</div>
           <div className='col'>Harga</div>

@@ -38,6 +38,7 @@ const Admin = () => {
                     defaultValue={row?.stock}
                     onChange={(e) => setNewStock(e.target.value)}
                     style={{ width:'45px' }}
+                    min={0}
                   />
                   <button
                     className='rounded px-3'
