@@ -57,7 +57,6 @@ const cartSlice = createSlice({
       localStorage.setItem('tprice', JSON.stringify(null))
       state.totalQuantity = 0;
       localStorage.setItem('tquantity', JSON.stringify(null))
-      alert('Check Out Success')
     },
     checkOut: (state, action) => {
       state.soldOutProducts.push({

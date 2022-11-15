@@ -1,17 +1,17 @@
-import axios from 'axios';
-import { useEffect } from 'react';
-import CardProducts from '../../components/CardItem/CardProd';
-import { useDispatch, useSelector } from 'react-redux';
-import Spinners from '../../components/Loader';
+import axios from "axios";
+import { useEffect } from "react";
+import CardProducts from "../../components/CardItem/CardProd";
+import { useDispatch, useSelector } from "react-redux";
+import Spinners from "../../components/Loader";
 import {
   productFail,
   productStart,
   productSuccess,
-} from '../../features/productRedux';
-import conAPI from '../../components/API/getAPI';
-import Banner from '../../components/Carousel'
+} from "../../features/productRedux";
+import conAPI from "../../components/API/getAPI";
+import Banner from "../../components/Carousel";
 
-const API=`${conAPI()}products`;
+const API = `${conAPI()}products`;
 
 const HomePage = () => {
   const product = useDispatch();
@@ -25,8 +25,8 @@ const HomePage = () => {
         const addSomeData = res.data.map((e) => {
           e.stock = 20;
           e.sold = 0;
-          return e
-        })
+          return e;
+        });
         product(productSuccess(addSomeData));
       })
       .catch((err) => {
@@ -41,12 +41,17 @@ const HomePage = () => {
   }, []);
 
   return (
-    <div className='container'>
-      <Banner/>
+    <div className="container">
+      <Banner />
       {loading ? (
-        <Spinners/>
+        <Spinners />
       ) : products.length !== 0 ? (
-        <div className="container mb-5" style={{ display : 'grid'}}>
+        <div className="container mb-5" style={{ display: "grid" }}>
+          <div className="container">
+            <p className="h2 text-left custom">
+              <span className="spanCustom">Semua Product</span>
+            </p>
+          </div>
           <div className="row">
             {products.map((item) => (
               <div className="col-sm-3 py-4" key={item?.id}>
@@ -62,9 +67,7 @@ const HomePage = () => {
         </div>
       ) : (
         <div className="w-full mt-6">
-          <p>
-            Halaman Gagal Dimuat
-          </p>
+          <p>Halaman Gagal Dimuat</p>
         </div>
       )}
     </div>
