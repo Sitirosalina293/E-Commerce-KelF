@@ -46,7 +46,7 @@ const HomePage = () => {
       {loading ? (
         <Spinners/>
       ) : products.length !== 0 ? (
-        <div className="container" style={{ display : 'grid'}}>
+        <div className="container mb-5" style={{ display : 'grid'}}>
           <div className="row">
             {products.map((item) => (
               <div className="col-sm-3 py-4" key={item?.id}>

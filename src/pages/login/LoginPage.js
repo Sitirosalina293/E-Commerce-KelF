@@ -46,11 +46,16 @@ const LoginPage = () => {
       className="container min-vh-100
     "
     >
-      <div className="flex flex-col items-center justify-center p-4">
-        <div className="text-center flex items-center justify-center flex-col">
-          <h4 className="w-full">User Login</h4>
+      {error && (
+        <div class="alert alert-danger" role="alert">
+          Wrong username or password
         </div>
-        <div className="my-3 mx-auto" style={{ width: "50%" }}>
+        )}
+      <div className="mx-auto">
+        <div className="mx-auto" style={{ textAlign:'center' }}>
+          <h4>User Login</h4>
+        </div>
+        <div className="my-3 mx-auto px-4 col-sm-5">
           <div class="form-floating mb-3">
             <input
               type="text"
@@ -70,7 +75,7 @@ const LoginPage = () => {
             />
             <label for="floatingPassword">Password</label>
           </div>
-          <div class="d-grid gap-2 col-2 mx-auto mt-5">
+          <div class="mx-auto mt-5" style={{ width:'100px' }}>
             <button
               class="btn btn-primary"
               type="button"
@@ -81,9 +86,6 @@ const LoginPage = () => {
             </button>
           </div>
         </div>
-        {error && (
-          <p className="text-center text-red-500">Wrong username or password</p>
-        )}
       </div>
     </div>
   );

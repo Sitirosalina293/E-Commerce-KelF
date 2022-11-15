@@ -2,11 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct, updateProduct } from "../../features/cartRedux";
-import {
-  StarFill,
-  PlusCircleFill,
-  DashCircleFill,
-} from "react-bootstrap-icons";
+import { StarFill } from "react-bootstrap-icons";
+import AddMinBtn from '../../components/ValueItem/ValueProd'
 
 const DetailProduct = () => {
   const location = useLocation();
@@ -77,38 +74,19 @@ const DetailProduct = () => {
               <h5 className="card-text mb-3">${product?.price}</h5>
               <p className="mb-4">{product?.description}</p>
               <div className="card-text">
-                <div className="mb-3 mx-4">
-                  <DashCircleFill
-                    onClick={() => handleQuantity("dec")}
-                    style={{ fontSize: "23px" }}
-                  />
-                  <span className="mx-2" style={{ fontSize: "18px" }}>
-                    {quantity}
-                  </span>
-                  <PlusCircleFill
-                    disabled={quantity === product?.stock}
-                    onClick={() => handleQuantity("inc")}
-                    style={{ fontSize: "23px" }}
-                  />
-                  {quantity === product?.stock ? (
-                    <div>
-                      <p>Max Quantity</p>
-                    </div>
-                  ) : quantity > product?.stock ? (
-                    <div>
-                      <p>Product sudah habis</p>
-                    </div>
-                  ) : (
-                    ""
-                  )}
-                </div>
+                <AddMinBtn
+                  value={quantity}
+                  minBtn={() => handleQuantity('dec')}
+                  addBtn={() => handleQuantity('inc')}
+                  stock={product?.stock}
+                />
                 <button
-                  className="py-2 px-4"
+                  className="mt-3 py-2 px-4"
                   variant="contained"
                   onClick={() => {
                     user ? addCart(product) : needLogin();
                   }}
-                  disabled={quantity < 1}
+                  disabled={(quantity < 1)}
                 >
                   Add to cart
                 </button>

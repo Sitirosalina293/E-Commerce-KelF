@@ -7,7 +7,7 @@ export default function SalesReportPage() {
   return (
     <>
       {products.length === 0 ? ('') : (
-      <div className='container border rounded p-5 min-vh-100
+      <div className='container border rounded p-5 min-vh-100 mb-5
       '>
         <div className='row fw-bold p-2 justify-content-lg-between'>
           <div className='col-sm-8'>Product</div>
@@ -21,7 +21,7 @@ export default function SalesReportPage() {
             <div className='col-sm-8'>{item?.title}</div>
             <div className='col' style={{ textAlign:'right' }}>$ {item?.price}</div>
             <div className='col'style={{ textAlign:'right' }}>{item?.sold}</div>
-            <div className='col'style={{ textAlign:'right' }}>{item?.sold * item?.price}</div>
+            <div className='col'style={{ textAlign:'right' }}>$ {item?.sold * item?.price}</div>
           </div>
         ))}
       </div>

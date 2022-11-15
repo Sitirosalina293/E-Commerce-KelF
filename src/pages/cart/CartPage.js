@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { removeCart, checkOut } from "../../features/cartRedux";
 import { productCheckout } from "../../features/productRedux";
-import CartItem from "../../components/CartItem/CartProduct";
+import CartItem from "../../components/CartItem";
 
 const CartPage = () => {
   const cart = useSelector((state) => state.cart);
@@ -22,10 +22,8 @@ const CartPage = () => {
   };
 
   return (
-    <div className="min-vh-100">
-      <div
-        className="container"
-      >
+    <div>
+      <div className="container" style={{ height:'60vh' }}>
         <div>
           <h4
             className="fw-bold mb-4"
@@ -35,7 +33,7 @@ const CartPage = () => {
           </h4>
         </div>
         <div className="container-item flex flex-wrap gap-8 justify-between">
-          <div className="my-4" style={{ flex: "3" }}>
+          <div className="my-4 mx-auto" style={{ flex: "3" }}>
             {cart.products.length !== 0 ? (
               cart.products.map((item, i) => <CartItem data={item} key={i} />)
             ) : (
@@ -44,24 +42,21 @@ const CartPage = () => {
           </div>
         </div>
       </div>
-      <div
-        className="shadow-lg mx-auto "
-        style={{ width: "50%", alignContent: "left", justifyContent: "left"  }}
-      >
-        <div className="px-3 py-3" style={{ width: "40%" }}>
-          <div className="d-flex flex-nowrap">
-            <p className="order-1 p-2">Total Product</p>
-            <p className="order-2 p-2" style={{ textAlign: "right" }}>
+      <div className="mb-4" style={{alignContent: "center"}}>
+        <div className="shadow-sm mx-auto px-3 py-3 mb-0" style={{ minWidth: "300px", maxWidth:'500px' }}>
+          <div className="row p-3">
+            <p className="col">Total Product</p>
+            <p className="col" style={{ textAlign: "right" }}>
               {cart.totalQuantity}
             </p>
           </div>
-          <div className="d-flex flex-nowrap">
-            <p className="order-1 p-2">Total Price</p>
-            <p className="order-2 p-2" style={{ textAlign: "right" }}>
+          <div className="row p-3">
+            <p className="col">Total Price</p>
+            <p className="col" style={{ textAlign: "right" }}>
               ${cart.totalPrice}
             </p>
           </div>
-          <div class="d-grid gap-2 col-1 mx-auto">
+          <div class="row mx-auto">
             <button
               class="btn bg-success text-white"
               onClick={() => handleCheckout(cart)}

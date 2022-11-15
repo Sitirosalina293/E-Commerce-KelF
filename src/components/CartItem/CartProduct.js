@@ -1,6 +1,7 @@
 import AddMinBtn from '../ValueItem/ValueProd';
 import { useDispatch } from 'react-redux';
 import { removeProduct, updateProduct } from '../../features/cartRedux';
+import { TrashFill } from 'react-bootstrap-icons';
 
 const CartItem = ({ data }) => {
   const dispatch = useDispatch();
@@ -23,28 +24,25 @@ const CartItem = ({ data }) => {
   };
 
   return (
-    <div className="">
-      <div className="row justify-content-lg-between">
-        <div className="col-sm-2 me-2 p-3">
-          <img src={data.image} alt={data.title} style={{height:'12rem'}}/>
+    <div>
+      <div className='mx-auto mb-4 shadow-sm row p-2 w-100'>
+        <img className="mx-auto col-lg-1 p-2" src={data.image} alt={data.title} style={{minWidth:'5rem', maxWidth:'20rem'}}/>
+        <div className="my-auto col-lg-8">
+          <h5>{data?.title?.slice(0, 40)}..</h5>
+          <p>
+            Price: ${data.price}
+          </p>
         </div>
-        <div className="col-sm-6">
-          <div className="top">
-            <h5>{data?.title?.slice(0, 40)}..</h5>
-            <p>
-              Price: ${data.price}
-            </p>
+        <div className="my-auto col-lg-2">
+          <div className='d-flex'>
+            <AddMinBtn className="col-sm-3"
+              value={data.quantity}
+              minBtn={() => handleQuantity('dec')}
+              addBtn={() => handleQuantity('inc')}
+              stock={data.stock}
+            />
+            <TrashFill className='col-sm-2 ms-3 my-auto' style={{  fontSize: "18px" }} onClick={handleDel}/>
           </div>
-          <button className="w-max" onClick={handleDel}>
-            delete
-          </button>
-        </div>
-        <div className="col-sm-2">
-          <AddMinBtn
-            value={data.quantity}
-            minBtn={() => handleQuantity('dec')}
-            addBtn={() => handleQuantity('inc')}
-          />
         </div>
       </div>
     </div>

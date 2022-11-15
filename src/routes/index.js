@@ -2,6 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import routes from "./routes";
+import Footer from '../components/footer';
 function Router() {
   return (
     <div className="main-container">
@@ -21,6 +22,7 @@ function Router() {
           }
         </Routes>
       </div>
+      <Footer/>
     </div>
   );
 }
