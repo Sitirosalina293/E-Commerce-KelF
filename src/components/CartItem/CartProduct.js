@@ -31,9 +31,9 @@ const CartItem = ({ data }) => {
 
   return (
     <div>
-      <div className='mx-auto mb-4 shadow-sm row p-2 w-100' onClick={()=>handleClickProduct(data)}>
-        <img className="mx-auto col-lg-1 p-2" src={data.image} alt={data.title} style={{minWidth:'5rem', maxWidth:'20rem'}}/>
-        <div className="my-auto col-lg-8">
+      <div className='mx-auto mb-4 shadow-sm row p-2 w-100'>
+        <img className="mx-auto col-lg-1 p-2" src={data.image} alt={data.title} style={{minWidth:'5rem', maxWidth:'20rem'}} onClick={()=>handleClickProduct(data)}/>
+        <div className="my-auto col-lg-8" onClick={()=>handleClickProduct(data)}>
           <h5>{data?.title?.slice(0, 40)}..</h5>
           <p>
             Price: ${data.price}
