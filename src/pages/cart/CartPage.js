@@ -73,9 +73,9 @@ const CartPage = () => {
               ${cart.totalPrice}
             </p>
           </div>
-          <div class="row mx-auto">
+          <div className="row mx-auto">
             <button
-              class="btn bg-success text-white"
+              className="btn bg-success text-white"
               onClick={() => handleCheckout(cart)}
               type="button"
             >

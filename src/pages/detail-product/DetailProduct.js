@@ -16,14 +16,28 @@ const DetailProduct = () => {
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(0);
 
+  const [ cartReady, setCartReady ] = useState(false);
+
   useEffect(() => {
-    setProduct(location.state);
+
+    if (!cartReady) {
+
+      setProduct(location.state);
+      setQuantity(cart.totalQuantity);
+
+      setCartReady(true);
+    }
+
   }, [location]);
 
   const handleQuantity = (type) => {
     if (type === "inc") {
+
       setQuantity(quantity + 1);
+    
     } else {
+
+      // 
       quantity > 0 && setQuantity(quantity - 1);
     }
   };
@@ -34,7 +48,7 @@ const DetailProduct = () => {
       dispatch(addProduct({ ...product, quantity }));
     } else {
       dispatch(
-        updateProduct({ ...product, quantity: a[0].quantity + quantity })
+        updateProduct({ ...product, quantity })
       );
     }
     navigate("/");
