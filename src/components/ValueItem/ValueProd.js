@@ -22,9 +22,13 @@ const AddMinBtn = ({ value, minBtn, addBtn, stock }) => {
           <p className="mx-auto my-auto">+</p>
         </button>
       </div>
-      {value === stock ? (
-        <div>
+      {value === stock && stock > 0? (
+        <div className='mt-2'>
           <p className="text-danger">Max Quantity</p>
+        </div>
+      ) : stock === 0 ? (
+        <div className='mt-2'>
+          <p className="text-danger">Sold Out</p>
         </div>
       ) : ('')}
     </div>

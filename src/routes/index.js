@@ -7,7 +7,7 @@ function Router() {
   return (
     <div className="main-container">
       <NavBar />
-      <div className="main-content mt-5">
+      <div className="main-content mt-5" style={{ minHeight:'90vh' }}>
         <Routes>
           {
             routes.map((route, index) => {

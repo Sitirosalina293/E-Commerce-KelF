@@ -37,7 +37,7 @@ const CartPage = () => {
 
   return (
     <div>
-      <div className="container" style={{ height: "60vh" }}>
+      <div className="container" style={{ minHeight: "60vh" }}>
         <div>
           <h4
             className="fw-bold mb-4"

@@ -11,7 +11,6 @@ const NavBar = () => {
 
   const user = useSelector((state) => state.user.currentUser);
   const cart = useSelector((state) => state.cart);
-  console.log(cart);
 
   const navigate = useNavigate();
 
@@ -54,6 +53,42 @@ const NavBar = () => {
                 }
               >
                 Home
+              </Nav.Link>
+              <Nav.Link
+                href="/jewelery"
+                className="fw-bold"
+                style={
+                  window.location.pathname === "/jewelery" ? { color: "#012657" } : null
+                }
+              >
+                Jewelery
+              </Nav.Link>
+              <Nav.Link
+                href="/manclothes"
+                className="fw-bold"
+                style={
+                  window.location.pathname === "/manclothes" ? { color: "#012657" } : null
+                }
+              >
+                Men's Clothing
+              </Nav.Link>
+              <Nav.Link
+                href="/womenclothes"
+                className="fw-bold"
+                style={
+                  window.location.pathname === "//womenclothes" ? { color: "#012657" } : null
+                }
+              >
+                Women's Clothing
+              </Nav.Link>
+              <Nav.Link
+                href="/electronics"
+                className="fw-bold"
+                style={
+                  window.location.pathname === "/electronics" ? { color: "#012657" } : null
+                }
+              >
+                Electronics
               </Nav.Link>
               {user?.email === "admin@bukapedia.com" ? (
                 <>

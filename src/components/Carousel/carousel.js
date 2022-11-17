@@ -6,10 +6,10 @@ const Banner=()=>{
   return (
     <Carousel>
       <div>
-          <img src="https://marketplace.canva.com/EAE8oc_cuQI/1/0/1600w/canva-biru-putih-oranye-modern-promo-ramadhan-banner-Gp_Mv2kbUyY.jpg" />
+          <img src="https://marketplace.canva.com/EAE8oc_cuQI/1/0/1600w/canva-biru-putih-oranye-modern-promo-ramadhan-banner-Gp_Mv2kbUyY.jpg" alt='promo1'/>
       </div>
       <div>
-          <img src="https://www.astralife.co.id/beta/wp-content/uploads/2016/03/Web-Banner-Customer-Day-1-Promo.jpg" />
+          <img src="https://www.astralife.co.id/beta/wp-content/uploads/2016/03/Web-Banner-Customer-Day-1-Promo.jpg" alt='promo2'/>
       </div>
     </Carousel>
   )

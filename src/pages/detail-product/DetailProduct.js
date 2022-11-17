@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useLocation, useParams } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { addProduct, updateProduct } from "../../features/cartRedux";
 import { StarFill } from "react-bootstrap-icons";
@@ -51,14 +51,14 @@ const DetailProduct = () => {
     >
       <div className="card mb-3 p-5 mx-auto" style={{ maxWidth: "1000px" }}>
         <div className="row no-gutters mx-auto">
-          <div className="col-sm-5">
+          <div className="col-md-5">
             <img
               src={product?.image}
               alt={product?.title}
               className="card-img"
             />
           </div>
-          <div className="col-sm-7">
+          <div className="col-md-7">
             <div className="card-body">
               <span className="card-text text-muted">
                 Categories : {product?.category}
@@ -84,7 +84,11 @@ const DetailProduct = () => {
                   className="mt-3 py-2 px-4"
                   variant="contained"
                   onClick={() => {
-                    user ? addCart(product) : needLogin();
+                    user?.email === "admin@bukapedia.com" ? (
+                      <div class="alert alert-danger" role="alert">
+                        You 
+                      </div>
+                    ) : user == null ? (needLogin()) : (addCart(product));
                   }}
                   disabled={(quantity < 1)}
                 >
