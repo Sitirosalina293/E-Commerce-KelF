@@ -84,13 +84,9 @@ const DetailProduct = () => {
                   className="mt-3 py-2 px-4"
                   variant="contained"
                   onClick={() => {
-                    user?.email === "admin@bukapedia.com" ? (
-                      <div class="alert alert-danger" role="alert">
-                        You 
-                      </div>
-                    ) : user == null ? (needLogin()) : (addCart(product));
+                    user == null ? (needLogin()) : (addCart(product));
                   }}
-                  disabled={(quantity < 1)}
+                  disabled={(quantity < 1 || user?.email === "admin@bukapedia.com" )}
                 >
                   Add to cart
                 </button>
