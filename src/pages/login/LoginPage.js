@@ -8,6 +8,7 @@ import {
   loginSuccess,
 } from "../../features/userRedux";
 import conAPI from "../../components/API/getAPI";
+import { toast, ToastContainer } from "react-toastify";
 
 const LoginPage = () => {
   const dispatch = useDispatch();
@@ -37,20 +38,12 @@ const LoginPage = () => {
         })
         .catch((err) => {
           dispatch(loginFailure());
+          toast.error("Wrong username or password!")
         });
     }
   };
-
   return (
-    <div
-      className="container min-vh-100
-    "
-    >
-      {error && (
-        <div class="alert alert-danger" role="alert">
-          Wrong username or password
-        </div>
-        )}
+    <div className="container min-vh-100">
       <div className="mx-auto">
         <div className="mx-auto" style={{ textAlign:'center' }}>
           <h4>User Login</h4>
@@ -85,6 +78,17 @@ const LoginPage = () => {
               {loading ? "Loading..." : "LOGIN"}
             </button>
           </div>
+          <ToastContainer
+              position="top-center"
+              autoClose={1500}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
         </div>
       </div>
     </div>

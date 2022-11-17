@@ -2,6 +2,7 @@ import AddMinBtn from '../ValueItem/ValueProd';
 import { useDispatch } from 'react-redux';
 import { removeProduct, updateProduct } from '../../features/cartRedux';
 import { TrashFill } from 'react-bootstrap-icons';
+import { useNavigate } from 'react-router-dom';
 
 const CartItem = ({ data }) => {
   const dispatch = useDispatch();
@@ -23,9 +24,14 @@ const CartItem = ({ data }) => {
     }
   };
 
+  const navigate = useNavigate();
+  const handleClickProduct = (item) => {
+    navigate(`/detail-item`, { state: item });
+  }
+
   return (
     <div>
-      <div className='mx-auto mb-4 shadow-sm row p-2 w-100'>
+      <div className='mx-auto mb-4 shadow-sm row p-2 w-100' onClick={()=>handleClickProduct(data)}>
         <img className="mx-auto col-lg-1 p-2" src={data.image} alt={data.title} style={{minWidth:'5rem', maxWidth:'20rem'}}/>
         <div className="my-auto col-lg-8">
           <h5>{data?.title?.slice(0, 40)}..</h5>

@@ -30,7 +30,11 @@ const AddMinBtn = ({ value, minBtn, addBtn, stock }) => {
         <div className='mt-2'>
           <p className="text-danger">Sold Out</p>
         </div>
-      ) : ('')}
+      ) : value > stock ? (
+        <div className='mt-2'>
+          <p className="text-danger">Your quantity is over of Stock</p>
+        </div>
+      ): ('')}
     </div>
   );
 };

@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateStock } from '../../features/productRedux';
 import { Spinner } from 'react-bootstrap';
+import { toast, ToastContainer } from "react-toastify";
+
 
 const Admin = () => {
   const { products, loading } = useSelector((state) => state.item);
@@ -9,12 +11,21 @@ const Admin = () => {
   const [newStock, setNewStock] = useState(0)
 
   const handleUpdateStock = (data) => {
-    if (newStock) {
+    if (newStock >= 0) {
       dispatch(updateStock({ ...data, stock: parseInt(newStock) }))
+      showMessage("success");
     } else {
       dispatch(updateStock({ ...data, stock: 0 }))
+      showMessage("failed");
     }
   }
+  const showMessage = (data) => {
+    if (data === "success") {
+      toast.success("Stock Updated, Reload please!");
+    } else {
+      toast.error("Update Stock Failed, Reload please!");
+    }
+  };
 
   return (
     <div className='container'>
@@ -31,22 +42,33 @@ const Admin = () => {
                 <div className="d-flex col-lg-2 my-auto" style={{ height:'20%' }}>
                   <input
                     className='me-3'
-                    label="Stock"
                     type="number"
                     defaultValue={row?.stock}
                     onChange={(e) => setNewStock(e.target.value)}
-                    style={{ width:'45px' }}
+                    style={{ width:'45px', textAlign:'center' }}
                     min={0}
                   />
                   <button
                     className='rounded px-3'
                     variant="contained"
                     onClick={() => handleUpdateStock(row)}
+                    disabled={newStock<0}
                   >
                     Update
                   </button>
                 </div>
               </div>
+              <ToastContainer
+              position="top-center"
+              autoClose={1500}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+            />
             </div>
           ))
           :
